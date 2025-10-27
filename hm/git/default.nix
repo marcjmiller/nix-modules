@@ -19,14 +19,9 @@ in
     programs.git = {
       package = pkgs.gitFull;
       enable = true;
-      userName = user.fullName;
-      userEmail = user.email;
-      signing = {
-        key = user.signingkey;
-        signByDefault = true;
-        signer = "gpg";
-      };
-      extraConfig = {
+      settings = {
+        user.name = user.fullName;
+        user.email = user.email;
         core.askPass = "";
         core.editor = "vim";
         init.defaultBranch = "main";
@@ -41,6 +36,11 @@ in
         help.autocorrect = 10;
         diff.histogram = "histogram";
         core.pager = "${pkgs.delta}/bin/delta";
+      };
+      signing = {
+        key = user.signingkey;
+        signByDefault = true;
+        signer = "gpg";
       };
     };
   };
